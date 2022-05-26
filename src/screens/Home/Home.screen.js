@@ -1,11 +1,15 @@
-import React, {useEffect} from "react";
-import {SafeAreaView, Dimensions, TouchableOpacity, Text, View, FlatList, ScrollView, BackHandler} from 'react-native'
+import React, {useEffect, useRef} from "react";
+import {Dimensions, TouchableOpacity, Text, View, ScrollView, BackHandler, Platform, Animated, Image, ImageBackground} from 'react-native'
+import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
+import * as Animatable from 'react-native-animatable';
+import {useTranslation} from 'react-i18next'
+import Logo from '../../../assets/images/Small_Logo.svg'
 
 import EStyleSheet from 'react-native-extended-stylesheet';
 const entireScreenWidth = Dimensions.get('screen').width;
 EStyleSheet.build({$rem: entireScreenWidth / 380});
 
-import {Header} from '../../components/Header.component'
+// import {Header} from '../../components/Header.component'
 import {Card} from '../../components/Card.component'
 import {SubCard} from '../../components/SubCard.component'
 
@@ -63,8 +67,13 @@ const SUB_DUMMY = [
 
 ]
 
+const height = Dimensions.get('screen').height
+const MIN_HEIGHT = Platform.OS === 'ios' ? 90 : 55;
+const MAX_HEIGHT = 170;
 
 export const Home = ({navigation}) => {
+    const {t} = useTranslation()
+    const navTitleView = useRef(null);
 
     useEffect(()=>{
         const onBack = () => {
@@ -75,11 +84,44 @@ export const Home = ({navigation}) => {
         console.log('back',backHandler)
     },[])
 
+    let AnimatedHeaderValue = new Animated.Value(0)
+    const Headear_Max_Height = 165
+    const Header_Min_Height = 50
+
+    const animatedHeaderBackgroundColor = AnimatedHeaderValue.interpolate({
+        inputRange: [0, Headear_Max_Height - Header_Min_Height],
+        outputRange: ['#5C4FA6', '#5C4FA6'],
+        extrapolate: 'clamp'
+    })
+
+    const animatedHeaderHeight = AnimatedHeaderValue.interpolate({
+        inputRange: [0, Headear_Max_Height - Header_Min_Height],
+        outputRange: [165, 50],
+        extrapolate: 'clamp'
+    })
+
     return(
-        <SafeAreaView style={{flex:1, backgroundColor: '#fff'}}>
-            
-            <Header welcome='Welcome back John!' welcomeText='Stay healthy & safe'/>
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 60}}>
+
+        <View style={{flex:1, backgroundColor: '#fff'}}>
+            {/* <Header welcome={[t("WelcomeBack"), " John!"]} welcomeText={t("StayHealthy")}/> */}
+                <Animated.View style={[
+                    styles.header,
+                    {
+                        height: animatedHeaderHeight,
+                        backgroundColor: animatedHeaderBackgroundColor
+                    }
+                ]}>
+                    <Text style={{fontSize: 16, color: '#fff'}}>{[t("WelcomeBack"), " John!"]}</Text>
+                </Animated.View>
+                  <ScrollView 
+                    showsVerticalScrollIndicator={false} 
+                    contentContainerStyle={{paddingBottom: 60}}
+                    scrollEventThrottle={16}
+                    onScroll={Animated.event(
+                        [{nativeEvent: {contentOffset: {y: AnimatedHeaderValue}}}],
+                        {useNativeDriver: false}
+                    )} 
+                >
                 <Text style={[styles.label, {marginBottom: 20}]}>Your ongoing booking</Text>
                 {DUMMY.map((item)=>{
                     return(
@@ -117,9 +159,8 @@ export const Home = ({navigation}) => {
                     )
                 })}
                 </ScrollView>
-            </ScrollView>
-            
-        </SafeAreaView>
+            </ScrollView>            
+        </View>
     )
 }
 
@@ -128,6 +169,11 @@ const styles = EStyleSheet.create({
         backgroundColor: '#fff',
         paddingHorizontal: '25rem'
         
+    },
+    header:{
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     rowContainer:{
         flexDirection: 'row', 
@@ -158,5 +204,40 @@ const styles = EStyleSheet.create({
         fontFamily: 'Roboto-Medium',
         fontWeight: '500',
         color: '#5C4FA6'
-    }
+    },
+    image: {
+      height: MAX_HEIGHT,
+      width: Dimensions.get('window').width,
+      alignSelf: 'stretch',
+      resizeMode: 'cover',
+    },
+    titleContainer: {
+      flex: 1,
+      paddingLeft: '25rem',
+      paddingTop: '80rem',
+    },
+    imageTitle: {
+      fontSize:'22rem',
+        fontFamily: 'Roboto-Medium',
+        color:'#fff',
+        fontWeight: 'bold'
+    },
+    subImageTitle:{
+      fontSize:'14rem',
+      fontFamily: 'Roboto-Regular',
+      fontWeight: '500',
+      color:'#fff'
+    } ,  
+    navTitleView: {
+      height: MIN_HEIGHT,
+      justifyContent: 'center',
+      // paddingTop: Platform.OS === 'ios' ? '40rem' : '10rem',
+      paddingLeft: '25rem',
+    },
+    navTitle: {
+      color: 'white',
+      fontSize: '18rem',
+      backgroundColor: 'transparent',
+    },
 })
+

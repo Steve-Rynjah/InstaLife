@@ -31,7 +31,7 @@ export const Alerts = ({navigation}) => {
 const styles = EStyleSheet.create({
     container:{
         flex:1,
-        backgroundColor: '#fff',
+        backgroundColor: '#F2F2F2',
         justifyContent: 'center',
         alignItems: 'center'
     },

@@ -1,0 +1,15 @@
+{
+    "translation":{
+        "SelectLang": "Choisir la langue",
+        "Enter": "Entrez votre numéro de mobile",
+        "WeWill": "Nous vous enverrons le code de confirmation",
+        "Continue": "CONTINUEZ",
+        "Paste": "COLLER DEPUIS SMS",
+        "PleaseEnter": "S'il vous plaît, entrez le code à 4 chiffres que nous avons envoyé sur votre numéro sous forme de sms",
+        "Login": "CONNEXION",
+        "Resend": "Renvoyer le code",
+        "WrongCode": "Le code est faux. Veuillez saisir le bon code et réessayer",
+        "WelcomeBack": "Content de te revoir",
+        "StayHealthy": "Restez en bonne santé et en sécurité"   
+    }
+}

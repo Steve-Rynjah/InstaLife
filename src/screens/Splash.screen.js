@@ -1,5 +1,6 @@
 import React,{useEffect} from "react";
 import {SafeAreaView, Dimensions, Platform, KeyboardAvoidingView} from 'react-native'
+import {ROUTE_NAMES} from '../constants/routeNames'
 
 import EStyleSheet from 'react-native-extended-stylesheet';
 const entireScreenWidth = Dimensions.get('screen').width;
@@ -11,7 +12,7 @@ export const Splash = ({navigation}) => {
 
     useEffect(()=>{
         setTimeout(()=>{
-            navigation.navigate('Registration')
+            navigation.navigate(ROUTE_NAMES.TAB_NAV)
         },5000)
     },[])
 

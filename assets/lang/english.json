@@ -1,0 +1,15 @@
+{
+    "translation":{
+        "SelectLang": "Select Language",
+        "Enter": "Enter your mobile number",
+        "WeWill": "We will send you confirmation code",
+        "Continue": "CONTINUE",
+        "Paste": "PASTE FROM SMS",
+        "PleaseEnter": "Please, enter 4-digit code we sent on your number as sms",
+        "Login": "LOGIN",
+        "Resend": "Resend Code",
+        "WrongCode": "Code is wrong. Please enter the right code and try again",
+        "WelcomeBack": "Welcome Back",
+        "StayHealthy": "Stay healthy & safe"   
+    }
+}
