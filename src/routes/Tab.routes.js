@@ -20,7 +20,7 @@ EStyleSheet.build({$rem: entireScreenWidth / 380});
 import {Home} from '../screens/Home/Home.screen'
 import {Booking} from '../screens/Boookings/Booking.screen'
 import {Alerts} from '../screens/Alert/Alerts.screen'
-import {Profile} from '../screens/Profile/Profile.screen'
+import {Profile} from '../screens/Profile/screen/Profile.screen'
 
 const Tab = createBottomTabNavigator();
 
@@ -33,6 +33,7 @@ export const TabNav = () => {
             tabBarInactiveTintColor: '#C9C9C9',
             tabBarStyle: [styles.bottomTabContainer],
             tabBarShowLabel: false,
+            headerShown: false
         }
         )}>
       <Tab.Screen

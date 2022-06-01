@@ -4,6 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack'
 import {Splash} from '../screens/Splash.screen'
 // import {Registration} from '../screens/Registration.screen'
 import {TabNav} from './Tab.routes'
+import {UpdateProfile} from '../screens/Profile/screen/updateProfile'
 
 const Stack = createStackNavigator();
 
@@ -13,6 +14,7 @@ export const StackNav = () => {
             <Stack.Screen name="Splash" component={Splash} options={{headerShown: false}}/>
             {/* <Stack.Screen name="Registration" component={Registration} options={{headerShown: false}}/> */}
             <Stack.Screen name="TabNav" component={TabNav} options={{headerShown: false}}/>
+            <Stack.Screen name="UpdateProfile" component={UpdateProfile} options={{headerShown: false}}/>
         </Stack.Navigator>
     )
 }
